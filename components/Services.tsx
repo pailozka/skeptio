@@ -33,9 +33,9 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 border-t border-navy/10">
+    <section id="services" className="py-24 border-t border-dark/10">
       <div className="max-w-7xl mx-auto px-6">
-        <p className="text-electric text-xs uppercase tracking-[0.3em] font-medium flex items-center gap-3">
+        <p className="text-dark text-xs uppercase tracking-[0.3em] font-medium flex items-center gap-3">
           <span className="w-6 h-px bg-crimson inline-block" />
           Services
         </p>
@@ -43,16 +43,16 @@ export default function Services() {
           What we do
         </h2>
 
-        <div className="mt-16 grid md:grid-cols-3 border-l border-t border-navy/10">
+        <div className="mt-16 grid md:grid-cols-3 border-l border-t border-dark/10">
           {services.map((s) => (
             <div
               key={s.num}
-              className="border-r border-b border-navy/10 p-8 hover:bg-navy/[0.03] transition-colors group"
+              className="border-r border-b border-dark/10 p-8 hover:bg-navy/[0.03] transition-colors group"
             >
-              <span className="font-display font-black text-crimson text-sm">
+              <span className="font-display font-black text-dark text-sm">
                 {s.num}
               </span>
-              <h3 className="font-display font-bold text-xl text-navy mt-4 mb-3 group-hover:text-crimson transition-colors leading-tight">
+              <h3 className="font-display font-bold text-xl text-navy mt-4 mb-3 group-hover:text-dark transition-colors leading-tight">
                 {s.name}
               </h3>
               <p className="text-navy/50 text-sm leading-relaxed">{s.desc}</p>
@@ -60,7 +60,7 @@ export default function Services() {
                 {s.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-electric text-xs uppercase tracking-[0.1em] border border-electric/30 px-2 py-1"
+                    className="text-dark text-xs uppercase tracking-[0.1em] border border-dark/30 px-2 py-1"
                   >
                     {tag}
                   </span>

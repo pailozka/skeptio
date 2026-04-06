@@ -1,11 +1,11 @@
 export default function Footer() {
   return (
-    <footer className="border-t border-navy/10">
+    <footer className="border-t border-dark/10">
       <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <span className="font-display font-black text-xl text-navy">
+        <span className="font-display font-black text-xl text-dark">
           SKEPTIO
         </span>
-        <span className="text-navy/30 text-xs">
+        <span className="text-dark/30 text-xs">
           © {new Date().getFullYear()} Skeptio. All rights reserved.
         </span>
         <div className="flex gap-6">
@@ -17,7 +17,7 @@ export default function Footer() {
             <a
               key={link.label}
               href={link.href}
-              className="text-navy/40 hover:text-gold text-xs uppercase tracking-[0.15em] transition-colors"
+              className="text-dark/40 hover:text-dark text-xs uppercase tracking-[0.15em] transition-colors"
             >
               {link.label}
             </a>

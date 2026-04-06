@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Figtree } from "next/font/google";
+import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -9,10 +9,10 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
-const figtree = Figtree({
+const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-figtree",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-jakarta",
   display: "swap",
 });
 
@@ -75,8 +75,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${figtree.variable}`}>
-      <body className="bg-ash text-navy font-sans antialiased">{children}</body>
+    <html lang="en" className={`${bricolage.variable} ${jakartaSans.variable}`}>
+      <body className="bg-light text-dark font-sans antialiased">{children}</body>
     </html>
   );
 }

@@ -5,9 +5,7 @@ const projects = [
     desc: "Restaurant discovery and menu exploration platform. Browse and compare dining options across local establishments — fast, searchable, mobile-first.",
     tags: ["Fullstack", "React", "Web Design", "SEO"],
     url: "https://myrestiq.com",
-    accentBg: "bg-crimson",
-    darkText: false,
-    category: "Food & Hospitality Tech",
+    accentBg: "bg-dark",
   },
   {
     name: "DnesníSong.cz",
@@ -15,21 +13,19 @@ const projects = [
     desc: "Czech daily music platform. Curated song recommendations delivered every day — focused and fast for discovering today's melody.",
     tags: ["Fullstack", "Next.js", "SEO", "Design"],
     url: "https://dnesnisong.cz",
-    accentBg: "bg-gold",
-    darkText: true,
-    category: "Entertainment",
+    accentBg: "bg-dark",
   },
 ];
 
 export default function Work() {
   return (
-    <section id="work" className="py-24 border-t border-navy/10">
+    <section id="work" className="py-24 border-t border-dark/10">
       <div className="max-w-7xl mx-auto px-6">
-        <p className="text-electric text-xs uppercase tracking-[0.3em] font-medium flex items-center gap-3">
-          <span className="w-6 h-px bg-crimson inline-block" />
+        <p className="text-dark text-xs uppercase tracking-[0.3em] font-medium flex items-center gap-3">
+          <span className="w-6 h-px bg-dark inline-block" />
           Selected Work
         </p>
-        <h2 className="font-display font-black text-[clamp(2.5rem,5vw,5rem)] text-navy uppercase mt-3 leading-none">
+        <h2 className="font-display font-black text-[clamp(2.5rem,5vw,5rem)] text-dark uppercase mt-3 leading-none">
           Projects
         </h2>
 
@@ -40,24 +36,14 @@ export default function Work() {
               href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block rounded-2xl overflow-hidden border border-navy/10 hover:border-crimson/40 transition-all"
+              className="group block overflow-hidden border border-dark/10 hover:border-dark/40 transition-all"
             >
               {/* Preview band */}
-              <div
-                className={`${p.accentBg} h-52 flex flex-col items-center justify-center`}
-              >
-                <p
-                  className={`font-display font-black text-3xl uppercase tracking-tight ${
-                    p.darkText ? "text-navy" : "text-ash"
-                  }`}
-                >
+              <div className={`${p.accentBg} h-52 flex flex-col items-center justify-center text-light`}>
+                <p className="font-display font-black text-3xl uppercase tracking-tight">
                   {p.name}
                 </p>
-                <p
-                  className={`text-sm mt-2 italic ${
-                    p.darkText ? "text-navy/60" : "text-ash/60"
-                  }`}
-                >
+                <p className="text-sm mt-2 italic text-light/60">
                   &ldquo;{p.tagline}&rdquo;
                 </p>
               </div>
@@ -65,25 +51,22 @@ export default function Work() {
               {/* Info */}
               <div className="p-8">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-electric text-xs uppercase tracking-[0.15em]">
-                    {p.category}
-                  </span>
-                  <span className="text-navy/30 text-xs">
+                  <span className="text-dark text-xs uppercase tracking-[0.15em]">
                     {p.url.replace("https://", "")}
                   </span>
                 </div>
-                <p className="text-navy/60 text-sm leading-relaxed">{p.desc}</p>
+                <p className="text-dark/60 text-sm leading-relaxed">{p.desc}</p>
                 <div className="flex flex-wrap gap-2 mt-6">
                   {p.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs text-navy/50 border border-navy/15 px-2 py-1 uppercase tracking-wider"
+                      className="text-xs text-dark/50 border border-dark/15 px-2 py-1 uppercase tracking-wider"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 text-xs text-crimson group-hover:text-gold transition-colors uppercase tracking-[0.15em]">
+                <div className="mt-6 text-xs text-dark group-hover:text-dark/60 transition-colors uppercase tracking-[0.15em]">
                   Visit project →
                 </div>
               </div>
