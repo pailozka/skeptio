@@ -31,7 +31,7 @@ export default function Hero() {
             {siteData.hero.headline.split("AND").map((text, i) => (
               <span key={i} className="block">
                 {text}
-                {i === 0 && <span className="font-light italic text-foreground/20 ml-4 hidden md:inline">AND</span>}
+                {i === 0 && <span className="font-light italic text-foreground ml-4 hidden md:inline">AND</span>}
               </span>
             ))}
           </motion.h1>

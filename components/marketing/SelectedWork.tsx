@@ -8,9 +8,10 @@ export default function SelectedWork() {
     <section id="work" className="py-24 bg-background">
       <div className="max-w-[1440px] mx-auto px-6">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-20">
-          <span className="font-sans font-bold text-[10px] tracking-[0.3em] text-foreground/40">/ SELECTED WORK</span>
-          <div className="h-[1px] bg-background/5 grow" />
+        <div className="text-center mb-20">
+          <h2 className="font-display font-bold text-[clamp(3rem,8vw,7rem)] leading-none tracking-tight uppercase text-foreground">
+            SELECTED WORK
+          </h2>
         </div>
 
         {/* Project Grid */}

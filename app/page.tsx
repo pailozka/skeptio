@@ -1,7 +1,8 @@
 import Navbar from "@/components/marketing/Navbar";
 import Hero from "@/components/marketing/Hero";
-import Expertise from "@/components/marketing/Expertise";
+import Services from "@/components/marketing/Services";
 import SelectedWork from "@/components/marketing/SelectedWork";
+import Contact from "@/components/marketing/Contact";
 import CTA from "@/components/marketing/CTA";
 import Footer from "@/components/marketing/Footer";
 
@@ -29,8 +30,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Services />
         <SelectedWork />
-        <Expertise />
+        <Contact />
         <CTA />
       </main>
       <Footer />

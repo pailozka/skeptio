@@ -7,7 +7,6 @@ export const siteData = {
     { label: "CONTACT", href: "#contact" },
   ],
   hero: {
-    badge: "EST. 2024 / STUDIO",
     headline: "WE BUILD WEBSITES AND AI TOOLS",
     subtext: "Practical AI and high-performance web development for modern businesses.",
     cta: "START",
@@ -18,7 +17,7 @@ export const siteData = {
       category: "FULLSTACK / DESIGN",
       title: "MYRESTIQ",
       description: "Restaurant discovery and menu exploration platform. Browse and compare dining options across local establishments — fast, searchable, mobile-first.",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
+      image: "/work-myrestiq.png",
       link: "https://myrestiq.com",
       tags: ["React", "SEO", "Web Design"],
     },
