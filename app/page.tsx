@@ -1,9 +1,9 @@
-import Nav from "@/components/Nav";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import Work from "@/components/Work";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/marketing/Navbar";
+import Hero from "@/components/marketing/Hero";
+import Expertise from "@/components/marketing/Expertise";
+import SelectedWork from "@/components/marketing/SelectedWork";
+import CTA from "@/components/marketing/CTA";
+import Footer from "@/components/marketing/Footer";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -26,12 +26,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
+      <Navbar />
       <main>
         <Hero />
-        <Services />
-        <Work />
-        <Contact />
+        <SelectedWork />
+        <Expertise />
+        <CTA />
       </main>
       <Footer />
     </>
