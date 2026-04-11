@@ -7,7 +7,7 @@ export default function CTA() {
   return (
     <section className="bg-foreground py-32 px-6">
       <div className="max-w-[1440px] mx-auto flex flex-col items-center text-center">
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -16,8 +16,8 @@ export default function CTA() {
         >
           {siteData.cta.subtitle}
         </motion.p>
-        
-        <motion.h2 
+
+        <motion.h2
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
@@ -27,7 +27,7 @@ export default function CTA() {
           {siteData.cta.headline}
         </motion.h2>
 
-        <motion.button 
+        <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
           className="bg-background text-foreground px-12 py-5 font-sans font-bold text-sm tracking-[0.2em] uppercase hover:bg-surface-highest transition-colors"

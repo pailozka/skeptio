@@ -1,10 +1,10 @@
-import Navbar from "@/components/marketing/Navbar";
-import Hero from "@/components/marketing/Hero";
-import Services from "@/components/marketing/Services";
-import SelectedWork from "@/components/marketing/SelectedWork";
-import Contact from "@/components/marketing/Contact";
-import CTA from "@/components/marketing/CTA";
-import Footer from "@/components/marketing/Footer";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import SelectedWork from "@/components/SelectedWork";
+import Contact from "@/components/Contact";
+import CTA from "@/components/CTA";
+import Footer from "@/components/Footer";
 
 const jsonLd = {
   "@context": "https://schema.org",

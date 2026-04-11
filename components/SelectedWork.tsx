@@ -17,7 +17,7 @@ export default function SelectedWork() {
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-surface-dim/20 border border-surface-dim/20 overflow-hidden">
           {siteData.projects.map((project) => (
-            <motion.div 
+            <motion.div
               key={project.id}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -27,8 +27,8 @@ export default function SelectedWork() {
             >
               {/* Card Image */}
               <div className="absolute inset-0 grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover opacity-30 group-hover:opacity-60 transition-opacity"
                 />
@@ -53,7 +53,7 @@ export default function SelectedWork() {
                   ))}
                 </div>
 
-                <a 
+                <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"

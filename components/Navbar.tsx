@@ -17,7 +17,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
         isScrolled ? "bg-background/80 backdrop-blur-md border-b border-surface-dim/20" : "bg-transparent"
       }`}
@@ -31,8 +31,8 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-12">
           {siteData.nav.map((item) => (
-            <a 
-              key={item.label} 
+            <a
+              key={item.label}
               href={item.href}
               className="font-sans font-medium text-xs tracking-widest hover:text-foreground/60 transition-colors"
             >
@@ -45,7 +45,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden flex flex-col gap-1.5 z-50"
         >
@@ -65,8 +65,8 @@ export default function Navbar() {
             className="fixed inset-0 bg-background z-40 flex flex-col items-center justify-center gap-8"
           >
             {siteData.nav.map((item) => (
-              <a 
-                key={item.label} 
+              <a
+                key={item.label}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="font-display font-bold text-4xl tracking-tighter"

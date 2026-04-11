@@ -1,3 +1,4 @@
+import Tag from "@/components/Tag";
 const projects = [
   {
     name: "MyRestiq",
@@ -58,12 +59,7 @@ export default function Work() {
                 <p className="text-dark/60 text-sm leading-relaxed">{p.desc}</p>
                 <div className="flex flex-wrap gap-2 mt-6">
                   {p.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs text-dark/50 border border-dark/15 px-2 py-1 uppercase tracking-wider"
-                    >
-                      {tag}
-                    </span>
+                    <Tag key={tag} label={tag} variant="navy" />
                   ))}
                 </div>
                 <div className="mt-6 text-xs text-dark group-hover:text-dark/60 transition-colors uppercase tracking-[0.15em]">
