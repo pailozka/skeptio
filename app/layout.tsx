@@ -75,8 +75,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${jakartaSans.variable}`}>
-      <body className="bg-light text-dark font-sans antialiased">{children}</body>
+    <html lang="en" className={`${bricolage.variable} ${jakartaSans.variable}`} suppressHydrationWarning>
+      <body className="bg-light text-dark font-sans antialiased" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
