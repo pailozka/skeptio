@@ -50,7 +50,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="max-w-2xl mx-auto border border-foreground/10"
+          className="max-w-2xl mx-auto"
         >
           {status === "sent" ? (
             <div className="p-16 flex flex-col items-center text-center gap-6">
@@ -68,16 +68,16 @@ export default function Contact() {
                 <legend className="font-sans font-bold text-[10px] tracking-[0.3em] text-foreground/40 uppercase mb-5">
                   SERVICE NEEDED
                 </legend>
-                <div className="grid grid-cols-3 border border-foreground/10">
+                <div className="grid grid-cols-3 gap-3">
                   {services.map((s) => (
                     <button
                       key={s.id}
                       type="button"
                       onClick={() => setService(s.id)}
-                      className={`py-4 px-3 font-sans font-bold text-[10px] tracking-[0.2em] uppercase transition-colors border-r border-foreground/10 last:border-r-0 ${
+                      className={`py-4 px-3 font-sans font-bold text-[10px] tracking-[0.2em] uppercase transition-colors ${
                         service === s.id
                           ? "bg-foreground text-background"
-                          : "text-foreground/50 hover:text-foreground hover:bg-foreground/5"
+                          : "text-foreground border border-foreground hover:bg-foreground hover:text-background"
                       }`}
                     >
                       {s.label}
@@ -138,7 +138,7 @@ export default function Contact() {
                 disabled={!service || !email || status === "sending"}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-foreground text-background px-10 py-5 font-sans font-bold text-sm tracking-[0.2em] uppercase disabled:opacity-30 disabled:cursor-not-allowed hover:bg-foreground/90 transition-colors self-start"
+                className="bg-foreground text-background px-10 py-5 font-sans font-bold text-sm tracking-[0.2em] uppercase disabled:opacity-30 disabled:cursor-not-allowed hover:bg-foreground transition-colors self-start"
               >
                 {status === "sending" ? "SENDING..." : "SEND REQUEST"}
               </motion.button>

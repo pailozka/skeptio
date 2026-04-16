@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 function GrainyBackground() {
@@ -79,6 +79,66 @@ const services = [
   },
 ];
 
+function ServiceRow({ service: s, index: i }: { service: typeof services[0]; index: number }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
+      className="group service-row py-10 border-t border-background/10 last:border-b flex flex-col md:flex-row md:items-center gap-4 md:gap-0 -mx-6 px-6 cursor-default"
+    >
+      <div className="flex items-center justify-between w-full md:w-auto md:flex-1">
+        {/* Title */}
+        <h3 className="font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-none tracking-tight uppercase text-background">
+          {s.title}
+        </h3>
+
+        {/* Mobile expand button */}
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="md:hidden ml-4 flex-shrink-0 w-8 h-8 flex items-center justify-center text-background transition-transform duration-300"
+          style={{ transform: expanded ? "rotate(45deg)" : "rotate(0deg)" }}
+          aria-expanded={expanded}
+        >
+          +
+        </button>
+      </div>
+
+      {/* Mobile: toggle via expanded state; Desktop: hover */}
+      <ul className={`flex flex-col gap-1 md:w-[40%] transition-opacity duration-300 hidden md:flex md:opacity-0 md:group-hover:opacity-100`}>
+        {s.points.map((p) => (
+          <li
+            key={p}
+            className="font-sans text-base font-bold leading-relaxed"
+            style={{ color: "#ffffff" }}
+          >
+            {p}
+          </li>
+        ))}
+      </ul>
+      <ul
+        className={`flex flex-col gap-1 md:hidden transition-all duration-300 overflow-hidden ${
+          expanded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ maxHeight: expanded ? "200px" : "0px" }}
+      >
+        {s.points.map((p) => (
+          <li
+            key={p}
+            className="font-sans text-base font-bold leading-relaxed"
+            style={{ color: "#ffffff" }}
+          >
+            {p}
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+}
+
 export default function Services() {
   return (
     <section
@@ -99,32 +159,7 @@ export default function Services() {
         {/* List */}
         <div>
           {services.map((s, i) => (
-            <motion.div
-              key={s.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
-              className="group service-row py-10 border-t border-background/10 last:border-b flex flex-col md:flex-row md:items-center gap-4 md:gap-0 -mx-6 px-6 cursor-default"
-            >
-              {/* Title */}
-              <h3 className="font-display font-bold text-[clamp(1.5rem,3vw,2.5rem)] leading-none tracking-tight uppercase text-background md:flex-1">
-                {s.title}
-              </h3>
-
-              {/* Points — fades in on hover via GSAP */}
-              <ul className="flex flex-col gap-1 md:w-[40%] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {s.points.map((p) => (
-                  <li
-                    key={p}
-                    className="font-sans text-base font-bold leading-relaxed"
-                    style={{ color: "#ffffff" }}
-                  >
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+            <ServiceRow key={s.id} service={s} index={i} />
           ))}
         </div>
       </div>
