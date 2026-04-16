@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { siteData } from "@/lib/data";
@@ -24,9 +25,9 @@ export default function Navbar() {
     >
       <div className="max-w-[1440px] mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="font-display font-bold text-2xl tracking-tighter">
+        <Link href="/" className="font-display font-bold text-2xl tracking-tighter">
           {siteData.logo}
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-12">
@@ -34,12 +35,12 @@ export default function Navbar() {
             <a
               key={item.label}
               href={item.href}
-              className="font-sans font-medium text-xs tracking-widest hover:text-foreground/60 transition-colors"
+              className="font-sans font-semibold text-sm tracking-[0.12em] hover:text-foreground/60 transition-colors"
             >
               {item.label}
             </a>
           ))}
-          <button className="bg-foreground text-background px-8 py-3 font-sans font-bold text-xs tracking-widest hover:bg-surface-highest hover:text-foreground transition-all">
+          <button className="bg-foreground text-background px-8 py-3 font-sans font-bold text-sm tracking-[0.12em] rounded-xl hover:bg-surface-highest hover:text-foreground transition-all">
             {siteData.hero.cta}
           </button>
         </div>

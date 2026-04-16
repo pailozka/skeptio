@@ -8,7 +8,7 @@ export const siteData = {
   ],
   hero: {
     headline: "WE BUILD WEBSITES AND AI TOOLS",
-    subtext: "Practical AI and high-performance web development for modern businesses.",
+    subtext: "Practical AI and high performance web development for modern businesses.",
     cta: "START",
   },
   projects: [
