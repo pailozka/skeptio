@@ -40,7 +40,7 @@ export default function Navbar() {
               {item.label}
             </a>
           ))}
-          <button className="bg-foreground text-background px-8 py-3 font-sans font-bold text-sm tracking-[0.12em] rounded-xl hover:bg-surface-highest hover:text-foreground transition-all">
+          <button className="bg-foreground text-background px-8 py-3 font-sans font-bold text-sm tracking-[0.12em] hover:bg-surface-highest hover:text-foreground transition-all">
             {siteData.hero.cta}
           </button>
         </div>
@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden flex flex-col gap-1.5 z-50"
+          className="md:hidden flex flex-col gap-1.5 z-50 p-2 -mr-2"
         >
           <span className={`w-6 h-[2px] bg-foreground transition-transform ${isMobileMenuOpen ? "rotate-45 translate-y-[8px]" : ""}`} />
           <span className={`w-6 h-[2px] bg-foreground transition-opacity ${isMobileMenuOpen ? "opacity-0" : ""}`} />

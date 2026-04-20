@@ -5,8 +5,12 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
 import { siteData } from "@/lib/data";
+import dynamic from "next/dynamic";
 import logo from "@/app/logo.svg";
-import OrganicBackground from "./OrganicBackground";
+
+const OrganicBackground = dynamic(() => import("./OrganicBackground"), {
+  ssr: false,
+});
 
 const lines = [
   ["WE", "BUILD", "WEBSITES"],
@@ -43,20 +47,20 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-[90vh] flex flex-col items-start justify-end px-6 pb-20 pt-32 bg-background overflow-hidden"
+      className="relative min-h-[90vh] flex flex-col items-start justify-end px-6 pb-12 md:pb-20 pt-24 md:pt-32 bg-background overflow-hidden"
     >
       <OrganicBackground />
       
       <div className="max-w-[1440px] w-full mx-auto relative z-10">
-        <div className="pointer-events-auto flex flex-col xl:flex-row items-stretch gap-6 xl:gap-8">
+        <div className="pointer-events-auto flex flex-col xl:flex-row items-stretch xl:items-start gap-6 xl:gap-8">
           {/* Headline */}
           <div className="relative inline-block select-auto flex-1">
             <div
-              className="backdrop-blur-xl bg-background/30 border border-white/20 p-6 md:p-10 shadow-2xl overflow-hidden !rounded-[5rem] md:!rounded-[7rem]"
+              className="backdrop-blur-xl bg-background/30 border border-white/20 p-5 md:p-10 shadow-2xl overflow-hidden"
             >
               <h1
                 ref={headlineRef}
-                className="font-display font-bold text-[clamp(4rem,15vw,12rem)] leading-[0.85] tracking-tight text-foreground uppercase max-w-[1000px]"
+                className="font-display font-bold text-[clamp(2.5rem,11.5vw,12rem)] leading-[0.85] tracking-tight text-foreground uppercase max-w-[1000px]"
               >
                 {lines.map((line, li) => (
                   <span key={li} className="block">
@@ -81,17 +85,16 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-            className="backdrop-blur-xl bg-background/30 border border-white/20 p-6 md:p-10 shadow-2xl overflow-hidden !rounded-[5rem] md:!rounded-[7rem] w-full sm:max-w-[460px] xl:w-[390px] xl:max-w-none flex flex-col gap-8 justify-between"
+            className="backdrop-blur-xl bg-background/30 border border-white/20 p-5 md:p-10 shadow-2xl overflow-hidden w-full sm:max-w-[480px] xl:w-[420px] xl:max-w-none flex flex-col items-start gap-6 md:gap-10 justify-start"
           >
             <motion.div
-              className="w-32 h-32 md:w-40 md:h-40 mx-auto mt-6 md:mt-8"
-              animate={{ scaleX: [1, 1, -1, -1, 1] }}
+              className="w-32 h-32 md:w-40 md:h-40 self-center"
+              animate={{ rotateY: [0, 360] }}
               transition={{
-                duration: 4.2,
-                times: [0, 0.35, 0.5, 0.85, 1],
-                ease: "easeInOut",
+                duration: 1,
                 repeat: Infinity,
-                repeatDelay: 0,
+                repeatDelay: 4,
+                ease: "easeInOut",
               }}
               style={{ transformOrigin: "center center" }}
             >
@@ -102,7 +105,7 @@ export default function Hero() {
                 priority
               />
             </motion.div>
-            <p className="font-sans font-medium text-2xl md:text-[1.85rem] leading-[1.2] text-foreground/90 tracking-[-0.02em] mb-6 md:mb-8">
+            <p className="font-sans font-medium text-xl md:text-[1.75rem] leading-[1.22] text-foreground/90 tracking-[-0.02em] [text-wrap:balance]">
               {siteData.hero.subtext}
             </p>
           </motion.aside>

@@ -6,7 +6,7 @@ const projects = [
     desc: "Restaurant discovery and menu exploration platform. Browse and compare dining options across local establishments — fast, searchable, mobile-first.",
     tags: ["Fullstack", "React", "Web Design", "SEO"],
     url: "https://myrestiq.com",
-    accentBg: "bg-dark",
+    accentBg: "bg-[linear-gradient(to_right_top,#f5c126_0%,#f39200_40%,#f15530_100%)]",
   },
   {
     name: "DnesníSong.cz",

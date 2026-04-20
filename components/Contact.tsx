@@ -62,13 +62,13 @@ export default function Contact() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-10 flex flex-col gap-10">
+            <form onSubmit={handleSubmit} className="p-6 md:p-10 flex flex-col gap-8 md:gap-10">
               {/* Service selector */}
               <fieldset>
                 <legend className="font-sans font-bold text-[10px] tracking-[0.3em] text-foreground/40 uppercase mb-5">
                   SERVICE NEEDED
                 </legend>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {services.map((s) => (
                     <button
                       key={s.id}

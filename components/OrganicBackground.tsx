@@ -177,8 +177,9 @@ export default function OrganicBackground() {
 
     // Support resizing dynamically
     const updateSize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+      if (!mountRef.current) return;
+      const width = mountRef.current.offsetWidth;
+      const height = mountRef.current.offsetHeight;
       renderer.setSize(width, height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       if (material) {
@@ -237,7 +238,12 @@ export default function OrganicBackground() {
     mountRef.current.appendChild(renderer.domElement);
     updateSize();
 
-    window.addEventListener('resize', updateSize);
+    const resizeObserver = new ResizeObserver(() => {
+      updateSize();
+    });
+    if (mountRef.current) {
+      resizeObserver.observe(mountRef.current);
+    }
 
     const startTime = performance.now();
     let animationFrameId: number;
@@ -250,7 +256,7 @@ export default function OrganicBackground() {
     animate();
 
     return () => {
-      window.removeEventListener('resize', updateSize);
+      resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
 
       if (mountRef.current) {

@@ -17,7 +17,6 @@ export const siteData = {
       category: "FULLSTACK / DESIGN",
       title: "MYRESTIQ",
       description: "Restaurant discovery and menu exploration platform. Browse and compare dining options across local establishments — fast, searchable, mobile-first.",
-      images: ["/images/myrestiq-1.png", "/images/myrestiq-2.png", "/images/myrestiq-3.png"],
       link: "https://myrestiq.com",
       tags: ["React", "SEO", "Web Design"],
     },
@@ -26,7 +25,6 @@ export const siteData = {
       category: "NEXT.JS / SEO",
       title: "DNESNISONG.CZ",
       description: "Czech daily music platform. Curated song recommendations delivered every day — focused and fast for discovering today's melody.",
-      images: ["/images/dnesnisong.png", "/images/dnesnisong-2.png", "/images/dnesnisong-3.png"],
       link: "https://dnesnisong.cz",
       tags: ["Next.js", "Design", "Automation"],
     },
@@ -61,6 +59,6 @@ export const siteData = {
       { label: "CONTACT", href: "#contact" },
       { label: "PRIVACY", href: "#privacy" },
     ],
-    copyright: "© 2024 SKEPTIO STUDIO. ALL RIGHTS RESERVED.",
+    copyright: "© 2026 SKEPTIO STUDIO. ALL RIGHTS RESERVED.",
   }
 };
