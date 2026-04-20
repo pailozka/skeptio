@@ -1,0 +1,32 @@
+{
+  "name": "projects/12171748814914925813",
+  "projectId": "12171748814914925813",
+  "title": "Skeptio Agency Homepage",
+  "visibility": "PRIVATE",
+  "projectType": "TEXT_TO_UI_PRO",
+  "deviceType": "MOBILE",
+  "designTheme": {
+    "colorMode": "LIGHT",
+    "font": "SPACE_GROTESK",
+    "customColor": "#1A1A1A",
+    "headlineFont": "SPACE_GROTESK",
+    "bodyFont": "INTER",
+    "labelFont": "INTER"
+  },
+  "screens": {
+    "home_desktop": {
+      "id": "a08cdbb8120847b9875c30d74a0bc6cc",
+      "sourceScreen": "projects/12171748814914925813/screens/a08cdbb8120847b9875c30d74a0bc6cc",
+      "width": 2560,
+      "height": 7172,
+      "deviceType": "DESKTOP"
+    },
+    "home_mobile": {
+      "id": "0cea18dec19a45129d06c5792e8ee717",
+      "sourceScreen": "projects/12171748814914925813/screens/0cea18dec19a45129d06c5792e8ee717",
+      "width": 780,
+      "height": 6738,
+      "deviceType": "MOBILE"
+    }
+  }
+}

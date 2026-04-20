@@ -1,9 +1,12 @@
-import Nav from "@/components/Nav";
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import Work from "@/components/Work";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import dynamic from "next/dynamic";
+
+const Services = dynamic(() => import("@/components/Services"), { ssr: true });
+const SelectedWork = dynamic(() => import("@/components/SelectedWork"), { ssr: true });
+const Contact = dynamic(() => import("@/components/Contact"), { ssr: true });
+const CTA = dynamic(() => import("@/components/CTA"), { ssr: true });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -26,12 +29,13 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Nav />
+      <Navbar />
       <main>
         <Hero />
         <Services />
-        <Work />
+        <SelectedWork />
         <Contact />
+        <CTA />
       </main>
       <Footer />
     </>

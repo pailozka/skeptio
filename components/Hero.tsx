@@ -1,89 +1,114 @@
 "use client";
+
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { motion } from "framer-motion";
-import WaveGradient from "./WaveGradient";
+import { siteData } from "@/lib/data";
+import dynamic from "next/dynamic";
+import logo from "@/app/logo.svg";
 
-const TICKER_ITEMS =
-  "NEXT.JS · REACT · TYPESCRIPT · NODE.JS · POSTGRESQL · OPENAI · ANTHROPIC · FIGMA · TAILWIND · PRISMA · ";
+const OrganicBackground = dynamic(() => import("./OrganicBackground"), {
+  ssr: false,
+});
 
-const services = [
-  "Web Design",
-  "Fullstack Dev",
-  "SEO",
-  "AI Integration",
-  "Business Automation",
+const lines = [
+  ["WE", "BUILD", "WEBSITES"],
+  ["AND", "AI", "TOOLS"],
 ];
 
 export default function Hero() {
-  return (
-    <section id="home" className="relative min-h-[70vh] flex flex-col overflow-hidden bg-navy">
-      {/* Holographic Iridescent Fluid Background */}
-      <WaveGradient />
+  const headlineRef = useRef<HTMLHeadingElement>(null);
 
-      {/* Content */}
-      <div className="relative z-10 flex-1 max-w-7xl mx-auto px-6 w-full flex flex-col justify-center items-center text-center pt-32 pb-16">
-        {/* Headline */}
-        <motion.div 
-          className="w-full max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <motion.h1 
-            className="font-display font-black leading-none uppercase pb-4"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          >
-            <span className="block text-navy text-[clamp(4rem,10vw,10rem)]">
-              We build
-            </span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500 text-[clamp(4rem,10vw,10rem)] pb-4">
-              the web.
-            </span>
-          </motion.h1>
-          <motion.p 
-            className="mt-10 mx-auto text-navy/70 font-medium text-lg md:text-xl leading-relaxed max-w-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Fullstack development, sharp design, SEO, and AI — built to last,
-            shipped to perform.
-          </motion.p>
-          <motion.div 
-            className="mt-12 flex items-center justify-center gap-6 flex-wrap"
+  useEffect(() => {
+    if (!headlineRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const words = headlineRef.current!.querySelectorAll<HTMLElement>(".word-inner");
+      
+      // Delay to ensure rendering is complete, especially on network mobile browsers where layout may fluctuate initially
+      gsap.fromTo(
+        words,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          stagger: 0.07,
+          delay: 0.1,
+        }
+      );
+    }, headlineRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      id="home"
+      className="relative min-h-[90vh] flex flex-col items-start justify-end px-6 pb-12 md:pb-20 pt-24 md:pt-32 bg-background overflow-hidden"
+    >
+      <OrganicBackground />
+      
+      <div className="max-w-[1440px] w-full mx-auto relative z-10">
+        <div className="pointer-events-auto flex flex-col xl:flex-row items-stretch xl:items-start gap-6 xl:gap-8">
+          {/* Headline */}
+          <div className="relative inline-block select-auto flex-1">
+            <div
+              className="backdrop-blur-xl bg-background/30 border border-white/20 p-5 md:p-10 shadow-2xl overflow-hidden"
+            >
+              <h1
+                ref={headlineRef}
+                className="font-display font-bold text-[clamp(2.5rem,11.5vw,12rem)] leading-[0.85] tracking-tight text-foreground uppercase max-w-[1000px]"
+              >
+                {lines.map((line, li) => (
+                  <span key={li} className="block">
+                    {line.map((word, wi) => (
+                      <span
+                        key={wi}
+                        className="inline-block mr-[0.2em] last:mr-0"
+                      >
+                        <span className="word-inner inline-block">
+                          {word}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </h1>
+            </div>
+          </div>
+
+          {/* Subtext panel */}
+          <motion.aside
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+            className="backdrop-blur-xl bg-background/30 border border-white/20 p-5 md:p-10 shadow-2xl overflow-hidden w-full sm:max-w-[480px] xl:w-[420px] xl:max-w-none flex flex-col items-start gap-6 md:gap-10 justify-start"
           >
-            <a
-              href="#contact"
-              className="px-8 py-4 bg-navy text-[#F5F7FA] text-xs font-semibold uppercase tracking-[0.15em] hover:bg-teal-500 transition-colors shadow-xl"
+            <motion.div
+              className="w-32 h-32 md:w-40 md:h-40 self-center"
+              animate={{ rotateY: [0, 360] }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                repeatDelay: 4,
+                ease: "easeInOut",
+              }}
+              style={{ transformOrigin: "center center" }}
             >
-              Start a project
-            </a>
-            <a
-              href="#work"
-              className="text-navy/70 hover:text-blue-600 transition-colors text-xs uppercase tracking-[0.15em] font-bold"
-            >
-              View work →
-            </a>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Tech ticker */}
-      <div className="relative z-10 border-t border-navy/10 py-4 overflow-hidden bg-white/40 backdrop-blur-md">
-        <div className="flex whitespace-nowrap animate-marquee">
-          {[0, 1].map((i) => (
-            <span
-              key={i}
-              className="text-navy text-xs uppercase tracking-[0.2em] pr-8 flex-shrink-0 font-bold"
-              style={{ fontFamily: '"Neue Haas Grotesk Display Pro", "Helvetica Neue", Helvetica, Arial, sans-serif' }}
-            >
-              {TICKER_ITEMS}
-            </span>
-          ))}
+              <Image
+                src={logo}
+                alt="Skeptio logo"
+                className="w-full h-full object-contain mx-auto"
+                priority
+              />
+            </motion.div>
+            <p className="font-sans font-medium text-xl md:text-[1.75rem] leading-[1.22] text-foreground/90 tracking-[-0.02em] [text-wrap:balance]">
+              {siteData.hero.subtext}
+            </p>
+          </motion.aside>
         </div>
       </div>
     </section>

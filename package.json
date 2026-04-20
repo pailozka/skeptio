@@ -3,17 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 0.0.0.0",
     "lint": "eslint",
     "postinstall": "mkdir -p node_modules/@tailwindcss/oxide && cp node_modules/@tailwindcss/oxide-linux-x64-gnu/tailwindcss-oxide.linux-x64-gnu.node node_modules/@tailwindcss/oxide/tailwindcss-oxide.linux-x64-gnu.node || true"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "framer-motion": "^12.38.0",
-    "next": "16.2.2",
+    "gsap": "^3.14.2",
+    "next": "^16.2.3",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@tailwindcss/oxide-linux-x64-gnu": "^4.2.2",
@@ -21,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.183.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
     "tailwindcss": "^4",

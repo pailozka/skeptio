@@ -29,6 +29,19 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+## Services Section — Grain Texture
+
+The Services section uses a canvas-based grain + sparkle effect (`components/marketing/Services.tsx`, `GrainyBackground` component).
+
+**Tuning knobs:**
+
+| What | Where | Effect |
+|------|-------|--------|
+| Grain opacity | `imageData.data[i + 3] = Math.random() * 50` | Raise `50` → denser grain, lower → subtler |
+| Sparkle frequency | `Math.floor((W * H) / 700)` | Lower divisor → more sparkles, raise → fewer |
+| Sparkle size | `Math.random() * 0.3 + 0.1` | First number = size variance, second = min radius |
+| Background darkness | `backgroundColor: "#1a1a1a"` on `<section>` | Adjust hex value |
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

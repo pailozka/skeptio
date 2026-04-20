@@ -1,58 +1,150 @@
-const details = [
-  { label: "Response time", value: "< 24 hours" },
-  { label: "Project kickoff", value: "Within 1 week" },
-  { label: "Stack", value: "Next.js · TypeScript · PostgreSQL" },
-];
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+type Service = "WEB" | "AI" | "BOTH";
 
 export default function Contact() {
-  return (
-    <section id="contact" className="py-32 border-t border-navy/10">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-12 gap-8 items-start">
-          {/* Left */}
-          <div className="md:col-span-7 border-l-4 border-crimson pl-8">
-            <p className="text-electric text-xs uppercase tracking-[0.3em] font-medium mb-8">
-              Next step
-            </p>
-            <h2 className="font-display font-black leading-none uppercase">
-              <span className="block text-navy text-[clamp(3rem,6vw,6rem)]">
-                Got a
-              </span>
-              <span className="block text-crimson text-[clamp(3rem,6vw,6rem)]">
-                project?
-              </span>
-            </h2>
-            <p className="text-navy/50 text-lg mt-8 max-w-md leading-relaxed">
-              Tell us what you&rsquo;re building. We&rsquo;ll tell you how we
-              can help — and how fast we can ship.
-            </p>
-            <a
-              href="mailto:hello@skeptio.com"
-              className="inline-block mt-12 px-8 py-4 bg-crimson text-ash text-xs font-semibold uppercase tracking-[0.15em] hover:bg-gold hover:text-navy transition-colors"
-            >
-              hello@skeptio.com
-            </a>
-          </div>
+  const [service, setService] = useState<Service | null>(null);
+  const [email, setEmail] = useState("");
+  const [url, setUrl] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-          {/* Right: details */}
-          <div className="md:col-span-5 md:pt-20">
-            <div className="border border-navy/10 p-8 space-y-6">
-              {details.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-start justify-between border-b border-navy/10 pb-6 last:border-0 last:pb-0"
-                >
-                  <span className="text-electric text-xs uppercase tracking-[0.15em]">
-                    {item.label}
-                  </span>
-                  <span className="text-navy text-sm font-medium text-right max-w-[55%]">
-                    {item.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!service || !email) return;
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ service, email, url }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  const services: { id: Service; label: string }[] = [
+    { id: "WEB", label: "WEB DEVELOPMENT" },
+    { id: "AI", label: "AI INTEGRATION" },
+    { id: "BOTH", label: "BOTH" },
+  ];
+
+  return (
+    <section id="contact" className="py-24 bg-background">
+      <div className="max-w-[1440px] mx-auto px-6">
+        {/* Heading */}
+        <div className="text-center mb-20">
+          <h2 className="font-display font-bold text-[clamp(3rem,8vw,7rem)] leading-none tracking-tight uppercase text-foreground">
+            CONTACT
+          </h2>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-2xl mx-auto"
+        >
+          {status === "sent" ? (
+            <div className="p-16 flex flex-col items-center text-center gap-6">
+              <p className="font-sans font-bold text-[10px] tracking-[0.4em] text-foreground/40 uppercase">
+                REQUEST RECEIVED
+              </p>
+              <p className="font-display font-bold text-3xl tracking-tight text-foreground uppercase">
+                WE'LL BE IN TOUCH.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="p-6 md:p-10 flex flex-col gap-8 md:gap-10">
+              {/* Service selector */}
+              <fieldset>
+                <legend className="font-sans font-bold text-[10px] tracking-[0.3em] text-foreground/40 uppercase mb-5">
+                  SERVICE NEEDED
+                </legend>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {services.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => setService(s.id)}
+                      className={`py-4 px-3 font-sans font-bold text-[10px] tracking-[0.2em] uppercase transition-colors ${
+                        service === s.id
+                          ? "bg-foreground text-background"
+                          : "text-foreground border border-foreground hover:bg-foreground hover:text-background"
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+
+              {/* Email */}
+              <div className="flex flex-col gap-3">
+                <label
+                  htmlFor="email"
+                  className="font-sans font-bold text-[10px] tracking-[0.3em] text-foreground/40 uppercase"
+                >
+                  YOUR EMAIL *
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@company.com"
+                  className="bg-transparent border border-foreground/20 px-5 py-4 font-sans text-sm text-foreground placeholder:text-foreground/20 focus:outline-none focus:border-foreground/60 transition-colors"
+                />
+              </div>
+
+              {/* URL */}
+              <div className="flex flex-col gap-3">
+                <label
+                  htmlFor="url"
+                  className="font-sans font-bold text-[10px] tracking-[0.3em] text-foreground/40 uppercase"
+                >
+                  YOUR WEBSITE{" "}
+                  <span className="text-foreground/20 normal-case tracking-normal font-normal">
+                    (optional)
+                  </span>
+                </label>
+                <input
+                  id="url"
+                  type="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="https://yoursite.com"
+                  className="bg-transparent border border-foreground/20 px-5 py-4 font-sans text-sm text-foreground placeholder:text-foreground/20 focus:outline-none focus:border-foreground/60 transition-colors"
+                />
+              </div>
+
+              {/* Submit */}
+              {status === "error" && (
+                <p className="font-sans text-xs text-foreground/40">
+                  Something went wrong — email us directly at hello@skeptio.com
+                </p>
+              )}
+
+              <motion.button
+                type="submit"
+                disabled={!service || !email || status === "sending"}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-foreground text-background px-10 py-5 font-sans font-bold text-sm tracking-[0.2em] uppercase disabled:opacity-30 disabled:cursor-not-allowed hover:bg-foreground transition-colors self-start"
+              >
+                {status === "sending" ? "SENDING..." : "SEND REQUEST"}
+              </motion.button>
+            </form>
+          )}
+        </motion.div>
       </div>
     </section>
   );
