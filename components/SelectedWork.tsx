@@ -111,8 +111,15 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function SelectedWork() {
   return (
-    <section id="work" className="py-24 bg-background">
-      <div className="max-w-[1440px] mx-auto px-6">
+    <section id="work" className="relative py-24 overflow-hidden">
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url(/images/R1-23.jpeg)" }}
+      />
+      <div className="absolute inset-0 bg-background/85" />
+
+      <div className="relative z-10 max-w-[1440px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className="font-display font-bold text-[clamp(3rem,8vw,7rem)] leading-none tracking-tight uppercase text-foreground">

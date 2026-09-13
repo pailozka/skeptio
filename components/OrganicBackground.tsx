@@ -1,7 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+
+function isWebGLAvailable() {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl2") || canvas.getContext("webgl"))
+    );
+  } catch {
+    return false;
+  }
+}
 
 const vertexShader = `
   varying vec2 vUv;
@@ -165,15 +177,33 @@ const fragmentShader = `
 
 export default function OrganicBackground() {
   const mountRef = useRef<HTMLDivElement>(null);
+  const [webglSupported, setWebglSupported] = useState(true);
 
   useEffect(() => {
-    if (!mountRef.current) return;
+    setWebglSupported(isWebGLAvailable());
+  }, []);
+
+  useEffect(() => {
+    if (!mountRef.current || !webglSupported) return;
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
     camera.position.z = 1;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    const originalConsoleError = console.error;
+    try {
+      // Three.js logs its own diagnostic console.error lines while probing
+      // for a working context before throwing; silence them here since we
+      // already handle the unsupported case via the try/catch below.
+      console.error = () => {};
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch {
+      setWebglSupported(false);
+      return;
+    } finally {
+      console.error = originalConsoleError;
+    }
 
     // Support resizing dynamically
     const updateSize = () => {
@@ -247,16 +277,27 @@ export default function OrganicBackground() {
 
     const startTime = performance.now();
     let animationFrameId: number;
+    let isVisible = true;
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+      if (!isVisible) return;
       material.uniforms.uTime.value = (performance.now() - startTime) / 1000;
       renderer.render(scene, camera);
     };
     animate();
 
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+    visibilityObserver.observe(mountRef.current);
+
     return () => {
       resizeObserver.disconnect();
+      visibilityObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
 
       if (mountRef.current) {
@@ -267,7 +308,18 @@ export default function OrganicBackground() {
       material.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [webglSupported]);
+
+  if (!webglSupported) {
+    return (
+      <div
+        className="absolute inset-0 z-0 w-full h-full pointer-events-none"
+        style={{ background: "var(--gradient-card)" }}
+      >
+        <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} />
+      </div>
+    );
+  }
 
   return (
     <div
